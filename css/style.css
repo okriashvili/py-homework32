@@ -1,0 +1,9 @@
+.good-rating {
+            color: green;
+        }
+.avarage-rating {
+    color: orange;
+}
+.bad-rating {
+    color: grey;
+}

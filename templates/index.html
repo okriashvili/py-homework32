@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Index page</title>
+    <style>
+        .good-rating {
+            color: green;
+        }
+        .avarage-rating {
+            color: orange;
+        }
+        .bad-rating {
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    <!--2. html-ის გამოყენებით მთავარ გვერდზე გამოიტანეთ ცხრილი(table ტეგებით)-->
+    <table border="2px green">
+        <tr>
+            {% for head in  headings%}
+                <th>{{head}}</th>
+            {%endfor%}
+        </tr>
+        <!--3. თუ რეიტინგი ≥ 9-ზე, ფილმის დასახელება და ა.შ. ტექსტი უნდა იყოს მწვანე ფერის-->
+        <!--4  თუ რეიტინგი მეტია ან ტოლი 8.5-ზე და ნაკლებია 9-ზე ტექსტი უნდა იყოს ნარინჯისფერი-->
+        <!--   სხვა შემთხვევაში ტექსტი უნდა იყოს ნაცრისფერი-->
+        {% for movie in movies%}
+            <tr class="
+                {% if movie.rating >= 9 %}
+                    good-rating
+                {% elif movie.rating >= 8.5 %}
+                    avarage-rating
+                {% else %}
+                    bad-rating
+                {% endif %}">
+                <td>{{movie.title}}</td>
+                <td>{{movie.year}}</td>
+                <td>{{movie.rating}}</td>
+                <td>{{movie.genre}}</td>
+                <td>{{movie.duration}}</td>
+            </tr>
+        {%endfor%}
+    </table>
+    <!--5. გამოიტანეთ სულ რამდენი ფილმია(დინამიურად, ხელით არ დათვალოთ)-->
+    <h2> we have {{all_movies}} movies</h2>
+    <!--6. გამოიტანეთ საშუალო ხანგრძლივობა ყველა ფილმის-->
+    <h2>avarage movie duration is: {{avg_duration}}</h2>
+</body>
+</html>
+
+
+
+
